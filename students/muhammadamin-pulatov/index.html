@@ -191,9 +191,11 @@
       align-items: center;
       gap: 18px;
       min-height: 108px;
+      padding: 0 18px 0 12px;
       overflow: hidden;
       border-top: 1px solid var(--line);
       isolation: isolate;
+      border-radius: 4px;
     }
 
     .project::before {
@@ -202,16 +204,17 @@
       inset: 0;
       background: var(--hover-bg);
       content: "";
-      clip-path: circle(0 at 0 100%);
-      transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+      clip-path: ellipse(0 0 at 0 100%);
+      transition: clip-path 760ms cubic-bezier(0.22, 1, 0.36, 1),
+                  border-radius 760ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .project:hover::before {
-      clip-path: circle(150% at 100% 0);
+      clip-path: ellipse(145% 120% at 100% 0);
     }
 
     .project:focus-visible::before {
-      clip-path: circle(150% at 100% 0);
+      clip-path: ellipse(145% 120% at 100% 0);
     }
 
     .project:focus-visible {
@@ -410,6 +413,7 @@
         grid-template-columns: 48px minmax(0, 1fr) 20px;
         gap: 12px;
         min-height: 92px;
+        padding: 0 12px 0 8px;
       }
 
       .project-number {
