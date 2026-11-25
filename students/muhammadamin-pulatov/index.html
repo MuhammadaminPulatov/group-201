@@ -12,13 +12,22 @@
       --muted: #727272;
       --line: #e7e7e7;
       --wash: #fafafa;
+      --hover-bg: #181818;
+      --hover-ink: #ffffff;
     }
 
     :root[data-theme="dark"] {
-      --ink: #f5f5f5;
-      --muted: #9a9a9a;
-      --line: #292929;
-      --wash: #111111;
+      --ink: #ffffff;
+      --muted: #aaaaaa;
+      --line: #242424;
+      --wash: #000000;
+      --hover-bg: #ffffff;
+      --hover-ink: #000000;
+      color-scheme: dark;
+    }
+
+    :root:not([data-theme="dark"]) {
+      color-scheme: light;
     }
 
     * {
@@ -70,16 +79,27 @@
       z-index: 10;
       top: 24px;
       right: 24px;
+      display: grid;
       width: 44px;
       height: 44px;
+      place-items: center;
       border: 1px solid var(--line);
       border-radius: 50%;
       background: var(--wash);
       color: var(--ink);
       cursor: pointer;
-      font: 700 16px/1 Arial, Helvetica, sans-serif;
       transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
                   background 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.6;
     }
 
     .theme-toggle:hover {
@@ -117,36 +137,26 @@
       display: inline;
       margin-left: 12px;
       color: var(--muted);
-      font-size: clamp(20px, 3vw, 30px);
-      letter-spacing: -0.06em;
+      font-size: clamp(28px, 4.5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.055em;
       white-space: nowrap;
       vertical-align: 12%;
     }
 
     .meta {
       display: grid;
-      gap: 7px;
+      gap: 12px;
       padding-bottom: 7px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.5;
     }
 
-    .status {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-    }
-
-    .status::before {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--ink);
-      content: "";
-      animation: pulse 2.4s ease-in-out infinite;
+    .meta-label {
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 700;
     }
 
     .works {
@@ -183,22 +193,34 @@
       min-height: 108px;
       overflow: hidden;
       border-top: 1px solid var(--line);
+      isolation: isolate;
     }
 
     .project::before {
       position: absolute;
-      left: 0;
-      width: 28px;
-      height: 1px;
-      background: var(--ink);
+      z-index: -1;
+      inset: 5px -20%;
+      background: var(--hover-bg);
       content: "";
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+      transform: skewY(-2deg) scaleX(0);
+      transform-origin: right;
+      transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .project:hover::before {
-      transform: scaleX(1);
+      transform: skewY(-2deg) scaleX(1);
+      transform-origin: left;
+    }
+
+    .project:hover {
+      color: var(--hover-ink);
+      border-color: var(--hover-bg);
+    }
+
+    .project:hover .project-number,
+    .project:hover .project-kind,
+    .project:hover .project-arrow {
+      color: var(--hover-ink);
     }
 
     .project:last-child {
@@ -329,17 +351,6 @@
       }
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.35;
-        transform: scale(0.75);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
     @media (max-width: 700px) {
       .shell {
         width: min(100% - 36px, 960px);
@@ -365,7 +376,7 @@
         display: block;
         margin-top: 18px;
         margin-left: 0;
-        font-size: clamp(24px, 7vw, 34px);
+        font-size: clamp(30px, 9vw, 42px);
       }
 
       .meta {
@@ -427,14 +438,18 @@
 </head>
 <body>
   <button class="theme-toggle" type="button" aria-label="Qorong‘i rejimni yoqish" title="Rang rejimini almashtirish">
-    <span aria-hidden="true">◐</span>
+    <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M18.36 5.64l-1.42 1.42M7.06 16.94l-1.42 1.42"/>
+      <circle cx="12" cy="12" r="4"/>
+    </svg>
   </button>
   <div class="shell">
     <main>
       <section class="intro" aria-labelledby="intro-title">
         <h1 id="intro-title">Muhammadamin<br>Pulatov <span>Group 201</span></h1>
         <div class="meta">
-          <span class="status">Web dasturlash</span>
+          <span class="meta-label">Web dasturlash</span>
+          <span>HTML · CSS · Portfolio</span>
         </div>
       </section>
 
@@ -463,7 +478,11 @@
     <footer>
       <span>© 2026</span>
       <div class="social-links">
-        <a href="https://github.com/MuhammadaminPulatov" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/MuhammadaminPulatov" target="_blank" rel="noopener noreferrer" aria-label="Muhammadamin Pulatov GitHub profili">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.91-2.78.61-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.64-1.35-2.22-.26-4.56-1.13-4.56-5.02 0-1.11.39-2.02 1.03-2.73-.1-.26-.45-1.29.1-2.69 0 0 .84-.27 2.75 1.04A9.4 9.4 0 0 1 12 7.9c.85 0 1.71.12 2.51.34 1.9-1.31 2.74-1.04 2.74-1.04.55 1.4.2 2.43.1 2.69.64.71 1.03 1.62 1.03 2.73 0 3.9-2.34 4.76-4.57 5.01.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.2 10.2 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/>
+          </svg>
+        </a>
         <a href="../../">Guruh 201</a>
       </div>
     </footer>
@@ -481,10 +500,10 @@
         "aria-label",
         theme === "dark" ? "Yorug‘ rejimga o‘tish" : "Qorong‘i rejimga o‘tish"
       );
-      themeToggle.querySelector("span").textContent = theme === "dark" ? "◑" : "◐";
+      themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
       document.querySelector('meta[name="theme-color"]').setAttribute(
         "content",
-        theme === "dark" ? "#111111" : "#fafafa"
+        theme === "dark" ? "#000000" : "#fafafa"
       );
     }
 
