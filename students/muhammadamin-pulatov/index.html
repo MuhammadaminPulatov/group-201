@@ -141,10 +141,8 @@
     }
 
     .intro {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 180px;
+      display: block;
       align-items: end;
-      gap: 40px;
       min-height: 340px;
       padding: 64px 0 58px;
       border-bottom: 1px solid var(--line);
@@ -177,21 +175,6 @@
 
     .intro h1 a {
       display: inline-block;
-    }
-
-    .meta {
-      display: grid;
-      gap: 12px;
-      padding-bottom: 7px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .meta-label {
-      color: var(--ink);
-      font-size: 16px;
-      font-weight: 700;
     }
 
     .works {
@@ -459,7 +442,7 @@
       }
 
       .intro {
-        grid-template-columns: 1fr;
+        display: block;
         align-items: end;
         gap: 30px;
         min-height: 300px;
@@ -475,12 +458,6 @@
         margin-top: 18px;
         margin-left: 0;
         font-size: clamp(30px, 9vw, 42px);
-      }
-
-      .meta {
-        grid-template-columns: auto 1fr;
-        align-items: baseline;
-        gap: 12px;
       }
 
       .theme-toggle {
@@ -558,11 +535,7 @@
   <div class="shell">
     <main>
       <section class="intro" aria-labelledby="intro-title">
-        <h1 id="intro-title">Muhammadamin<br>Pulatov <a href="../../" aria-label="201-guruh sahifasiga o‘tish"><span>201-guruh</span></a></h1>
-        <div class="meta">
-          <span class="meta-label">Veb-dasturlash</span>
-          <span>HTML · CSS · Portfolio</span>
-        </div>
+        <h1 id="intro-title">Muhammadamin<br>Pulatov <a href="../../" aria-label="201 sahifasiga o‘tish"><span>201</span></a></h1>
       </section>
 
       <section class="works" id="works" aria-labelledby="works-title">
