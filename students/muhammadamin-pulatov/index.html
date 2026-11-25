@@ -1,35 +1,28 @@
 <!doctype html>
-<html lang="uz">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Muhammadamin Pulatov — 201-guruh portfolio sahifasi.">
+  <meta name="description" content="Muhammadamin Pulatov - web development portfolio">
   <meta name="theme-color" content="#fafafa">
   <title>Muhammadamin Pulatov</title>
   <style>
     :root {
-      --ink: #181818;
-      --muted: #727272;
-      --line: #e7e7e7;
-      --wash: #fafafa;
-      --hover-bg: #181818;
-      --hover-ink: #ffffff;
-      --hover-wash: #ededed;
+      --background: #fafafa;
+      --foreground: #171717;
+      --muted: #737373;
+      --line: #e5e5e5;
+      --hover: #ededed;
+      color-scheme: light;
     }
 
     :root[data-theme="dark"] {
-      --ink: #ffffff;
-      --muted: #aaaaaa;
-      --line: #242424;
-      --wash: #000000;
-      --hover-bg: #ffffff;
-      --hover-ink: #000000;
-      --hover-wash: #171717;
+      --background: #000000;
+      --foreground: #ffffff;
+      --muted: #a3a3a3;
+      --line: #262626;
+      --hover: #171717;
       color-scheme: dark;
-    }
-
-    :root:not([data-theme="dark"]) {
-      color-scheme: light;
     }
 
     * {
@@ -42,33 +35,29 @@
 
     body {
       min-width: 320px;
+      min-height: 100vh;
       margin: 0;
-      background: var(--wash);
-      color: var(--ink);
+      background: var(--background);
+      color: var(--foreground);
       font-family: Arial, Helvetica, sans-serif;
       -webkit-font-smoothing: antialiased;
-      transition: background 500ms cubic-bezier(0.22, 1, 0.36, 1),
-                  color 500ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition: background 400ms ease, color 400ms ease;
+      overflow: hidden;
     }
 
-    body,
-    .project,
-    .project::before,
-    footer,
-    .theme-toggle {
-      transition-property: background, color, border-color;
-      transition-duration: 500ms;
-      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    a,
+    button {
+      color: inherit;
     }
 
     a {
-      color: inherit;
       text-decoration: none;
     }
 
-    a:focus-visible {
-      outline: 2px solid var(--ink);
-      outline-offset: 6px;
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--foreground);
+      outline-offset: 5px;
     }
 
     .shell {
@@ -76,25 +65,44 @@
       margin: 0 auto;
     }
 
-    .theme-toggle {
+    .floating-control {
       position: fixed;
-      z-index: 10;
+      z-index: 20;
       top: 24px;
-      right: 24px;
-      display: grid;
-      width: 44px;
+      display: inline-grid;
       height: 44px;
       place-items: center;
       border: 1px solid var(--line);
-      border-radius: 50%;
-      background: var(--wash);
-      color: var(--ink);
-      cursor: pointer;
-      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-                  background 500ms cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 999px;
+      background: var(--background);
+      transition: transform 220ms ease, background 400ms ease, border-color 400ms ease;
     }
 
-    .theme-toggle svg {
+    .floating-control:hover {
+      border-color: var(--foreground);
+    }
+
+    .back-button {
+      left: 24px;
+      grid-auto-flow: column;
+      gap: 8px;
+      padding: 0 14px;
+      color: var(--foreground);
+      cursor: pointer;
+      font: 700 13px/1 Arial, Helvetica, sans-serif;
+    }
+
+    .back-button:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-button {
+      right: 24px;
+      width: 44px;
+      cursor: pointer;
+    }
+
+    .theme-button svg {
       width: 18px;
       height: 18px;
       fill: none;
@@ -104,36 +112,13 @@
       stroke-width: 1.6;
     }
 
-    .theme-toggle:hover {
-      transform: rotate(12deg) scale(1.06);
+    .theme-button:hover {
+      transform: rotate(12deg);
     }
 
-    .theme-toggle:active {
-      transform: scale(0.94);
-    }
-
-    .back-button {
-      position: fixed;
-      z-index: 10;
-      top: 24px;
-      left: 24px;
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      gap: 8px;
-      padding: 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--wash);
-      color: var(--ink);
-      cursor: pointer;
-      font: 700 13px/1 Arial, Helvetica, sans-serif;
-      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-                  background 500ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .back-button:hover {
-      transform: translateX(-3px);
+    .theme-button:active,
+    .back-button:active {
+      transform: scale(0.96);
     }
 
     main {
@@ -141,160 +126,125 @@
     }
 
     .intro {
-      display: block;
-      align-items: end;
+      position: relative;
+      display: flex;
       min-height: 340px;
+      align-items: flex-end;
       padding: 64px 0 58px;
       border-bottom: 1px solid var(--line);
     }
 
-    .intro h1 {
-      max-width: 740px;
+    h1 {
+      max-width: 820px;
       margin: 0;
       font-size: clamp(54px, 8vw, 88px);
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.075em;
       line-height: 0.92;
     }
 
-    .intro h1 span {
-      display: inline;
-      margin-left: 12px;
-      color: var(--muted);
-      font-size: clamp(28px, 4.5vw, 46px);
-      font-weight: 700;
-      letter-spacing: -0.055em;
-      white-space: nowrap;
-      vertical-align: 12%;
-      transition: color 240ms ease, opacity 240ms ease;
+    h1 a {
+      position: absolute;
+      right: 0;
+      bottom: 58px;
     }
 
-    .intro h1 span:hover {
-      color: var(--ink);
+    h1 span {
+      display: block;
+      color: var(--foreground);
+      font-size: clamp(92px, 15vw, 150px);
+      letter-spacing: -0.09em;
+      line-height: 0.75;
+      opacity: 0.1;
+      transition: opacity 300ms ease, color 300ms ease;
     }
 
-    .intro h1 a {
-      display: inline-block;
+    h1 a:hover span {
+      opacity: 0.18;
     }
 
     .works {
-      padding: 38px 0 64px;
+      display: flex;
+      height: calc(100vh - 412px);
+      min-height: 180px;
+      flex-direction: column;
+      padding: 56px 0 64px;
     }
 
     .works-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 28px;
+      flex: none;
     }
 
     .works-heading h2,
     .works-heading p {
       margin: 0;
-      font-size: 14px;
     }
 
     .works-heading h2 {
+      font-size: clamp(28px, 4vw, 42px);
       font-weight: 700;
+      letter-spacing: -0.055em;
+      line-height: 1;
     }
 
     .works-heading p {
-      color: var(--muted);
-    }
-
-    .project-list-label {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .project-list-label::before {
+    .works-heading p::before {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--ink);
+      background: var(--foreground);
       content: "";
+    }
+
+    .project-list {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line) transparent;
+    }
+
+    .project-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .project-list::-webkit-scrollbar-thumb {
+      background: var(--line);
     }
 
     .project {
       display: grid;
-      position: relative;
       grid-template-columns: 76px minmax(0, 1fr) auto;
+      min-height: 108px;
       align-items: center;
       gap: 18px;
-      min-height: 108px;
       padding: 0 18px 0 12px;
-      overflow: hidden;
       border-top: 1px solid var(--line);
-      isolation: isolate;
-      border-radius: 4px;
-      transition: background 420ms cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 420ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .project::before {
-      display: none;
-    }
-
-    .project:hover::before {
-      display: none;
-    }
-
-    .project:focus-visible::before {
-      display: none;
-    }
-
-    .project:focus-visible {
-      color: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .project:hover {
-      color: var(--ink);
-      border-color: var(--ink);
-      background: var(--hover-wash);
-    }
-
-    .project:hover .project-number,
-    .project:hover .project-kind,
-    .project:hover .project-action,
-    .project:hover .project-description,
-    .project:hover .project-arrow {
-      color: var(--ink);
-    }
-
-    .project:focus-visible .project-number,
-    .project:focus-visible .project-kind,
-    .project:focus-visible .project-action,
-    .project:focus-visible .project-description,
-    .project:focus-visible .project-arrow,
-    .project:focus-visible .project-name {
-      color: var(--ink);
+      transition: background 300ms ease, border-color 300ms ease;
     }
 
     .project:last-child {
       border-bottom: 1px solid var(--line);
     }
 
-    .project-number,
-    .project-kind {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
     .project-number {
-      color: var(--ink);
+      color: var(--foreground);
       font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.06em;
-      line-height: 1;
-    }
-
-    .project-name {
-      font-size: clamp(21px, 3vw, 28px);
       font-weight: 700;
-      letter-spacing: -0.035em;
-      transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      letter-spacing: -0.06em;
     }
 
     .project-copy {
@@ -302,10 +252,17 @@
       gap: 5px;
     }
 
-    .project-description {
+    .project-name {
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      transition: transform 300ms ease;
+    }
+
+    .project-description,
+    .project-action {
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.4;
     }
 
     .project-action {
@@ -314,27 +271,26 @@
       align-items: center;
       justify-content: flex-end;
       gap: 9px;
-      color: var(--muted);
-      font-size: 13px;
-      transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-                  color 240ms ease;
     }
 
     .project-arrow {
-      font-size: 22px;
-      transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      font-size: 20px;
+      transition: transform 300ms ease;
     }
 
-    .project:hover .project-name {
-      transform: translateX(10px);
+    .project:hover,
+    .project:active {
+      background: transparent;
     }
 
-    .project:hover .project-action {
-      transform: translateX(-4px);
+    .project:hover .project-name,
+    .project:active .project-name {
+      transform: translateX(8px);
     }
 
-    .project:hover .project-arrow {
-      transform: translateX(7px);
+    .project:hover .project-arrow,
+    .project:active .project-arrow {
+      transform: translateX(5px);
     }
 
     footer {
@@ -347,94 +303,49 @@
       font-size: 14px;
     }
 
-    footer a {
-      transition: color 180ms ease;
-    }
-
-    footer a:hover,
-    .back-button:hover {
-      color: var(--ink);
-    }
-
-
     .social-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 6px;
     }
 
     .social-links a {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      transition: background 220ms ease, color 220ms ease;
     }
 
-    .social-links a::after {
-      position: absolute;
-      right: 0;
-      bottom: -4px;
-      left: 0;
-      height: 1px;
-      background: var(--ink);
-      content: "";
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    .social-links a:hover {
+      color: var(--foreground);
     }
 
-    .social-links a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .intro,
-    .works {
-      animation: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .works {
-      animation-delay: 100ms;
-    }
-
-    .project {
-      opacity: 0;
-      animation: project-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .project:nth-of-type(1) {
-      animation-delay: 220ms;
-    }
-
-    .project:nth-of-type(2) {
-      animation-delay: 320ms;
-    }
-
-    @keyframes reveal {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes project-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .social-links svg {
+      width: 18px;
+      height: 18px;
     }
 
     @media (max-width: 700px) {
       .shell {
-        width: min(100% - 36px, 960px);
+        width: calc(100% - 36px);
+      }
+
+      .floating-control {
+        top: 16px;
+      }
+
+      .back-button {
+        left: 16px;
+        height: 40px;
+        min-height: 40px;
+      }
+
+      .theme-button {
+        right: 16px;
+        width: 40px;
+        height: 40px;
       }
 
       main {
@@ -442,36 +353,40 @@
       }
 
       .intro {
-        display: block;
-        align-items: end;
-        gap: 30px;
         min-height: 300px;
-        padding: 52px 0 42px;
+        padding: 112px 0 42px;
       }
 
-      .intro h1 {
+      .works {
+        height: calc(100vh - 300px - 64px);
+        min-height: 150px;
+        padding: 44px 0 32px;
+      }
+
+      .works-heading {
+        margin-bottom: 22px;
+      }
+
+      .works-heading h2 {
+        font-size: 28px;
+      }
+
+      .works-heading p {
+        font-size: 12px;
+      }
+
+      h1 {
         font-size: clamp(48px, 15vw, 68px);
       }
 
-      .intro h1 span {
+      h1 span {
         display: block;
-        margin-top: 18px;
-        margin-left: 0;
-        font-size: clamp(30px, 9vw, 42px);
+        font-size: clamp(72px, 24vw, 112px);
       }
 
-      .theme-toggle {
-        top: 16px;
-        right: 16px;
-        width: 40px;
-        height: 40px;
-      }
-
-      .back-button {
-        top: 16px;
-        left: 16px;
-        min-height: 40px;
-        padding: 0 12px;
+      h1 a {
+        right: 0;
+        bottom: 42px;
       }
 
       .project {
@@ -489,10 +404,6 @@
         font-size: 20px;
       }
 
-      .project-kind {
-        display: none;
-      }
-
       .project-description,
       .project-action-text {
         display: none;
@@ -505,7 +416,7 @@
 
     @media (max-width: 380px) {
       .shell {
-        width: min(100% - 28px, 960px);
+        width: calc(100% - 28px);
       }
     }
 
@@ -518,104 +429,105 @@
       *::before,
       *::after {
         animation-duration: 0.01ms !important;
-        animation-delay: 0ms !important;
         transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
-  <button class="back-button" type="button" aria-label="Oldingi sahifaga qaytish">← Ortga</button>
-  <button class="theme-toggle" type="button" aria-label="Qorong‘i rejimni yoqish" title="Rang rejimini almashtirish">
-    <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M18.36 5.64l-1.42 1.42M7.06 16.94l-1.42 1.42"/>
-      <circle cx="12" cy="12" r="4"/>
+  <button class="floating-control back-button" type="button" aria-label="Go back">← Back</button>
+  <button class="floating-control theme-button" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"></path>
     </svg>
   </button>
+
   <div class="shell">
     <main>
       <section class="intro" aria-labelledby="intro-title">
-        <h1 id="intro-title">Muhammadamin<br>Pulatov <a href="../../" aria-label="201 sahifasiga o‘tish"><span>201</span></a></h1>
+        <h1 id="intro-title">
+          Muhammadamin
+          <br>Pulatov
+          <a href="../../" aria-label="Open 201"><span>201</span></a>
+        </h1>
       </section>
 
       <section class="works" id="works" aria-labelledby="works-title">
         <div class="works-heading">
-          <h2 id="works-title">Loyihalar</h2>
-          <p class="project-list-label">Eng yangisi birinchi</p>
+          <h2 id="works-title">Projects</h2>
+          <p>Latest first</p>
         </div>
 
-        <a class="project" href="./ipak-yoli/index.html" aria-label="Ipak yo‘li Tours loyihasini ochish">
+        <div class="project-list">
+        <a class="project" href="./ipak-yoli/index.html" aria-label="Open Ipak yo'li Tours">
           <span class="project-number">01</span>
           <span class="project-copy">
             <span class="project-name">Ipak yo‘li Tours</span>
-            <span class="project-description">Samarqand bo‘ylab sayohat sahifasi</span>
+            <span class="project-description">A travel website about Samarkand</span>
           </span>
           <span class="project-action">
-            <span class="project-action-text">Ochish</span>
+            <span class="project-action-text">Open</span>
             <span class="project-arrow" aria-hidden="true">→</span>
           </span>
         </a>
 
-        <a class="project" href="./FlexBox/index.html" aria-label="Flexbox mashqlari loyihasini ochish">
+        <a class="project" href="./FlexBox/index.html" aria-label="Open Flexbox exercises">
           <span class="project-number">02</span>
           <span class="project-copy">
-            <span class="project-name">Flexbox mashqlari</span>
-            <span class="project-description">HTML va CSS amaliy mashqlari</span>
+            <span class="project-name">Flexbox exercises</span>
+            <span class="project-description">HTML and CSS practice</span>
           </span>
           <span class="project-action">
-            <span class="project-action-text">Ochish</span>
+            <span class="project-action-text">Open</span>
             <span class="project-arrow" aria-hidden="true">→</span>
           </span>
         </a>
+        </div>
       </section>
     </main>
 
     <footer>
       <span>© 2026</span>
       <div class="social-links">
-        <a href="https://github.com/MuhammadaminPulatov" target="_blank" rel="noopener noreferrer" aria-label="Muhammadamin Pulatov GitHub profili">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+        <a href="https://github.com/MuhammadaminPulatov" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.91-2.78.61-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.64-1.35-2.22-.26-4.56-1.13-4.56-5.02 0-1.11.39-2.02 1.03-2.73-.1-.26-.45-1.29.1-2.69 0 0 .84-.27 2.75 1.04A9.4 9.4 0 0 1 12 7.9c.85 0 1.71.12 2.51.34 1.9-1.31 2.74-1.04 2.74-1.04.55 1.4.2 2.43.1 2.69.64.71 1.03 1.62 1.03 2.73 0 3.9-2.34 4.76-4.57 5.01.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.2 10.2 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/>
           </svg>
         </a>
-        <a href="https://instagram.com/YoshFounder.uz" target="_blank" rel="noopener noreferrer" aria-label="Muhammadamin Pulatov Instagram profili">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="3" y="3" width="18" height="18" rx="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
+        <a href="https://instagram.com/YoshFounder.uz" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"></circle>
           </svg>
         </a>
-        <a href="https://t.me/Muhammadamin_Pulatov" target="_blank" rel="noopener noreferrer" aria-label="Muhammadamin Pulatov Telegram profili">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+        <a href="https://t.me/Muhammadamin_Pulatov" target="_blank" rel="noopener noreferrer" aria-label="Telegram profile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
             <path d="M21.4 4.1 18.2 19c-.24 1.07-.87 1.33-1.76.83l-4.86-3.58-2.35 2.26c-.26.26-.48.48-.98.48l.35-4.92 8.96-8.1c.39-.35-.09-.54-.6-.19L6.3 12.7l-4.82-1.51c-1.05-.33-1.07-1.05.22-1.55L19.99 3.1c.87-.33 1.63.2 1.41 1Z"/>
           </svg>
         </a>
       </div>
     </footer>
   </div>
+
   <script>
     const root = document.documentElement;
-    const themeToggle = document.querySelector(".theme-toggle");
+    const themeButton = document.querySelector(".theme-button");
     const savedTheme = localStorage.getItem("portfolio-theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const startTheme = savedTheme || (prefersDark ? "dark" : "light");
 
     function applyTheme(theme) {
       root.dataset.theme = theme;
-      themeToggle.setAttribute(
-        "aria-label",
-        theme === "dark" ? "Yorug‘ rejimga o‘tish" : "Qorong‘i rejimga o‘tish"
-      );
-      themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
-      document.querySelector('meta[name="theme-color"]').setAttribute(
-        "content",
-        theme === "dark" ? "#000000" : "#fafafa"
-      );
+      const isDark = theme === "dark";
+      themeButton.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      themeButton.setAttribute("aria-pressed", String(isDark));
+      document.querySelector('meta[name="theme-color"]').content = isDark ? "#000000" : "#fafafa";
     }
 
-    applyTheme(startTheme);
+    applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
 
-    themeToggle.addEventListener("click", () => {
+    themeButton.addEventListener("click", () => {
       const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
       localStorage.setItem("portfolio-theme", nextTheme);
       applyTheme(nextTheme);
