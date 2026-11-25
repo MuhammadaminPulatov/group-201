@@ -46,37 +46,8 @@
       margin: 0 auto;
     }
 
-    header {
-      display: flex;
-      min-height: 88px;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .name {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    nav {
-      display: flex;
-      gap: 26px;
-      font-size: 13px;
-    }
-
-    nav a {
-      color: var(--muted);
-      transition: color 180ms ease;
-    }
-
-    nav a:hover {
-      color: var(--ink);
-    }
-
     main {
-      min-height: calc(100vh - 88px - 72px);
+      min-height: calc(100vh - 72px);
     }
 
     .intro {
@@ -98,6 +69,14 @@
       line-height: 0.92;
     }
 
+    .intro h1 span {
+      display: block;
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: clamp(40px, 7vw, 76px);
+      letter-spacing: -0.06em;
+    }
+
     .meta {
       display: grid;
       gap: 7px;
@@ -105,12 +84,6 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.5;
-    }
-
-    .meta strong {
-      color: var(--ink);
-      font-size: 13px;
-      font-weight: 700;
     }
 
     .works {
@@ -220,16 +193,8 @@
         width: min(100% - 36px, 960px);
       }
 
-      header {
-        min-height: 76px;
-      }
-
-      nav {
-        gap: 16px;
-      }
-
       main {
-        min-height: calc(100vh - 76px - 64px);
+        min-height: calc(100vh - 64px);
       }
 
       .intro {
@@ -242,6 +207,11 @@
 
       .intro h1 {
         font-size: clamp(48px, 15vw, 68px);
+      }
+
+      .intro h1 span {
+        margin-top: 24px;
+        font-size: clamp(38px, 12vw, 58px);
       }
 
       .meta {
@@ -269,15 +239,6 @@
       .shell {
         width: min(100% - 28px, 960px);
       }
-
-      nav {
-        gap: 12px;
-        font-size: 12px;
-      }
-
-      .name {
-        font-size: 13px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -297,19 +258,10 @@
 </head>
 <body>
   <div class="shell">
-    <header>
-      <a class="name" href="./">Muhammadamin Pulatov</a>
-      <nav aria-label="Sahifa navigatsiyasi">
-        <a href="#works">Ishlarim</a>
-        <a href="../../">Guruh 201</a>
-      </nav>
-    </header>
-
     <main>
       <section class="intro" aria-labelledby="intro-title">
-        <h1 id="intro-title">Muhammadamin<br>Pulatov</h1>
+        <h1 id="intro-title">Muhammadamin<br>Pulatov <span>Group 201</span></h1>
         <div class="meta">
-          <strong>Group 201</strong>
           <span>Web dasturlash</span>
         </div>
       </section>
