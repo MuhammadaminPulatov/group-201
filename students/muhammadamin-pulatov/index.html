@@ -202,16 +202,16 @@
       inset: 0;
       background: var(--hover-bg);
       content: "";
-      clip-path: circle(0 at 12% 50%);
-      transition: clip-path 900ms cubic-bezier(0.65, 0, 0.35, 1);
+      clip-path: circle(0 at 0 100%);
+      transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     .project:hover::before {
-      clip-path: circle(150% at 12% 50%);
+      clip-path: circle(150% at 100% 0);
     }
 
     .project:focus-visible::before {
-      clip-path: circle(150% at 12% 50%);
+      clip-path: circle(150% at 100% 0);
     }
 
     .project:focus-visible {
