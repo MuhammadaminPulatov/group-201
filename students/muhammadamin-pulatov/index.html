@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Muhammadamin Pulatov — Group 201 portfolio sahifasi.">
+  <meta name="description" content="Muhammadamin Pulatov — 201-guruh portfolio sahifasi.">
   <meta name="theme-color" content="#fafafa">
   <title>Muhammadamin Pulatov</title>
   <style>
@@ -236,7 +236,7 @@
     .project {
       display: grid;
       position: relative;
-      grid-template-columns: 76px minmax(0, 1fr) auto 24px;
+      grid-template-columns: 76px minmax(0, 1fr) auto;
       align-items: center;
       gap: 18px;
       min-height: 108px;
@@ -274,12 +274,16 @@
 
     .project:hover .project-number,
     .project:hover .project-kind,
+    .project:hover .project-action,
+    .project:hover .project-description,
     .project:hover .project-arrow {
       color: var(--ink);
     }
 
     .project:focus-visible .project-number,
     .project:focus-visible .project-kind,
+    .project:focus-visible .project-action,
+    .project:focus-visible .project-description,
     .project:focus-visible .project-arrow,
     .project:focus-visible .project-name {
       color: var(--ink);
@@ -310,6 +314,29 @@
       transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    .project-copy {
+      display: grid;
+      gap: 5px;
+    }
+
+    .project-description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .project-action {
+      display: flex;
+      min-width: 86px;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+                  color 240ms ease;
+    }
+
     .project-arrow {
       font-size: 22px;
       transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -317,6 +344,10 @@
 
     .project:hover .project-name {
       transform: translateX(10px);
+    }
+
+    .project:hover .project-action {
+      transform: translateX(-4px);
     }
 
     .project:hover .project-arrow {
@@ -467,7 +498,7 @@
       }
 
       .project {
-        grid-template-columns: 48px minmax(0, 1fr) 20px;
+        grid-template-columns: 48px minmax(0, 1fr) 24px;
         gap: 12px;
         min-height: 92px;
         padding: 0 12px 0 8px;
@@ -482,6 +513,11 @@
       }
 
       .project-kind {
+        display: none;
+      }
+
+      .project-description,
+      .project-action-text {
         display: none;
       }
 
@@ -522,9 +558,9 @@
   <div class="shell">
     <main>
       <section class="intro" aria-labelledby="intro-title">
-        <h1 id="intro-title">Muhammadamin<br>Pulatov <a href="../../" aria-label="Guruh 201 sahifasiga o‘tish"><span>Group 201</span></a></h1>
+        <h1 id="intro-title">Muhammadamin<br>Pulatov <a href="../../" aria-label="201-guruh sahifasiga o‘tish"><span>201-guruh</span></a></h1>
         <div class="meta">
-          <span class="meta-label">Web dasturlash</span>
+          <span class="meta-label">Veb-dasturlash</span>
           <span>HTML · CSS · Portfolio</span>
         </div>
       </section>
@@ -532,21 +568,31 @@
       <section class="works" id="works" aria-labelledby="works-title">
         <div class="works-heading">
           <h2 id="works-title">Loyihalar</h2>
-          <p class="project-list-label">Eng yangilari birinchi</p>
+          <p class="project-list-label">Eng yangisi birinchi</p>
         </div>
 
-        <a class="project" href="./ipak-yoli/index.html">
+        <a class="project" href="./ipak-yoli/index.html" aria-label="Ipak yo‘li Tours loyihasini ochish">
           <span class="project-number">01</span>
-          <span class="project-name">Ipak yo‘li Tours</span>
-          <span class="project-kind">Sayohat sahifasi</span>
-          <span class="project-arrow" aria-hidden="true">→</span>
+          <span class="project-copy">
+            <span class="project-name">Ipak yo‘li Tours</span>
+            <span class="project-description">Samarqand bo‘ylab sayohat sahifasi</span>
+          </span>
+          <span class="project-action">
+            <span class="project-action-text">Ochish</span>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </span>
         </a>
 
-        <a class="project" href="./FlexBox/index.html">
+        <a class="project" href="./FlexBox/index.html" aria-label="Flexbox mashqlari loyihasini ochish">
           <span class="project-number">02</span>
-          <span class="project-name">Flexbox mashqlari</span>
-          <span class="project-kind">HTML / CSS</span>
-          <span class="project-arrow" aria-hidden="true">→</span>
+          <span class="project-copy">
+            <span class="project-name">Flexbox mashqlari</span>
+            <span class="project-description">HTML va CSS amaliy mashqlari</span>
+          </span>
+          <span class="project-action">
+            <span class="project-action-text">Ochish</span>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </span>
         </a>
       </section>
     </main>
