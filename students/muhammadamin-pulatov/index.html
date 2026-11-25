@@ -196,48 +196,44 @@
       border-top: 1px solid var(--line);
       isolation: isolate;
       border-radius: 4px;
+      transition: background 420ms cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 420ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .project::before {
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background: var(--hover-bg);
-      content: "";
-      clip-path: ellipse(0 0 at 0 100%);
-      transition: clip-path 760ms cubic-bezier(0.22, 1, 0.36, 1),
-                  border-radius 760ms cubic-bezier(0.22, 1, 0.36, 1);
+      display: none;
     }
 
     .project:hover::before {
-      clip-path: ellipse(145% 120% at 100% 0);
+      display: none;
     }
 
     .project:focus-visible::before {
-      clip-path: ellipse(145% 120% at 100% 0);
+      display: none;
     }
 
     .project:focus-visible {
-      color: var(--hover-ink);
-      border-color: var(--hover-bg);
+      color: var(--ink);
+      border-color: var(--ink);
     }
 
     .project:hover {
-      color: var(--hover-ink);
-      border-color: var(--hover-bg);
+      color: var(--ink);
+      border-color: var(--muted);
+      background: color-mix(in srgb, var(--wash) 92%, var(--ink));
     }
 
     .project:hover .project-number,
     .project:hover .project-kind,
     .project:hover .project-arrow {
-      color: var(--hover-ink);
+      color: var(--ink);
     }
 
     .project:focus-visible .project-number,
     .project:focus-visible .project-kind,
     .project:focus-visible .project-arrow,
     .project:focus-visible .project-name {
-      color: var(--hover-ink);
+      color: var(--ink);
     }
 
     .project:last-child {
