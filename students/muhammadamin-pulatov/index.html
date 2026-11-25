@@ -199,17 +199,24 @@
     .project::before {
       position: absolute;
       z-index: -1;
-      inset: 5px -20%;
+      inset: 0;
       background: var(--hover-bg);
       content: "";
-      transform: skewY(-2deg) scaleX(0);
-      transform-origin: right;
-      transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+      clip-path: circle(0 at 12% 50%);
+      transition: clip-path 900ms cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     .project:hover::before {
-      transform: skewY(-2deg) scaleX(1);
-      transform-origin: left;
+      clip-path: circle(150% at 12% 50%);
+    }
+
+    .project:focus-visible::before {
+      clip-path: circle(150% at 12% 50%);
+    }
+
+    .project:focus-visible {
+      color: var(--hover-ink);
+      border-color: var(--hover-bg);
     }
 
     .project:hover {
@@ -220,6 +227,13 @@
     .project:hover .project-number,
     .project:hover .project-kind,
     .project:hover .project-arrow {
+      color: var(--hover-ink);
+    }
+
+    .project:focus-visible .project-number,
+    .project:focus-visible .project-kind,
+    .project:focus-visible .project-arrow,
+    .project:focus-visible .project-name {
       color: var(--hover-ink);
     }
 
