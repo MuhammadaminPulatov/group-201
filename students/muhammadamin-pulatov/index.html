@@ -219,6 +219,20 @@
       color: var(--muted);
     }
 
+    .project-list-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-list-label::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      content: "";
+    }
+
     .project {
       display: grid;
       position: relative;
@@ -518,20 +532,20 @@
       <section class="works" id="works" aria-labelledby="works-title">
         <div class="works-heading">
           <h2 id="works-title">Loyihalar</h2>
-          <p>Tanlangan ishlar</p>
+          <p class="project-list-label">Eng yangilari birinchi</p>
         </div>
 
-        <a class="project" href="./FlexBox/index.html">
+        <a class="project" href="./ipak-yoli/index.html">
           <span class="project-number">01</span>
-          <span class="project-name">Flexbox mashqlari</span>
-          <span class="project-kind">HTML / CSS</span>
+          <span class="project-name">Ipak yo‘li Tours</span>
+          <span class="project-kind">Sayohat sahifasi</span>
           <span class="project-arrow" aria-hidden="true">→</span>
         </a>
 
-        <a class="project" href="./ipak-yoli/index.html">
+        <a class="project" href="./FlexBox/index.html">
           <span class="project-number">02</span>
-          <span class="project-name">Ipak yo‘li Tours</span>
-          <span class="project-kind">Sayohat sahifasi</span>
+          <span class="project-name">Flexbox mashqlari</span>
+          <span class="project-kind">HTML / CSS</span>
           <span class="project-arrow" aria-hidden="true">→</span>
         </a>
       </section>
