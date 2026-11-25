@@ -14,6 +14,7 @@
       --wash: #fafafa;
       --hover-bg: #181818;
       --hover-ink: #ffffff;
+      --hover-wash: #ededed;
     }
 
     :root[data-theme="dark"] {
@@ -23,6 +24,7 @@
       --wash: #000000;
       --hover-bg: #ffffff;
       --hover-ink: #000000;
+      --hover-wash: #171717;
       color-scheme: dark;
     }
 
@@ -219,8 +221,8 @@
 
     .project:hover {
       color: var(--ink);
-      border-color: var(--muted);
-      background: color-mix(in srgb, var(--wash) 92%, var(--ink));
+      border-color: var(--ink);
+      background: var(--hover-wash);
     }
 
     .project:hover .project-number,
