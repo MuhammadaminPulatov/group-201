@@ -14,6 +14,13 @@
       --wash: #fafafa;
     }
 
+    :root[data-theme="dark"] {
+      --ink: #f5f5f5;
+      --muted: #9a9a9a;
+      --line: #292929;
+      --wash: #111111;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -29,6 +36,18 @@
       color: var(--ink);
       font-family: Arial, Helvetica, sans-serif;
       -webkit-font-smoothing: antialiased;
+      transition: background 500ms cubic-bezier(0.22, 1, 0.36, 1),
+                  color 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body,
+    .project,
+    .project::before,
+    footer,
+    .theme-toggle {
+      transition-property: background, color, border-color;
+      transition-duration: 500ms;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     a {
@@ -44,6 +63,31 @@
     .shell {
       width: min(960px, calc(100% - 64px));
       margin: 0 auto;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      z-index: 10;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--wash);
+      color: var(--ink);
+      cursor: pointer;
+      font: 700 16px/1 Arial, Helvetica, sans-serif;
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+                  background 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(12deg) scale(1.06);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.94);
     }
 
     main {
@@ -86,6 +130,23 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.5;
+    }
+
+    .status {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .status::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink);
+      content: "";
+      animation: pulse 2.4s ease-in-out infinite;
     }
 
     .works {
@@ -196,6 +257,34 @@
       color: var(--ink);
     }
 
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .social-links a {
+      position: relative;
+    }
+
+    .social-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: -4px;
+      left: 0;
+      height: 1px;
+      background: var(--ink);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .social-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
     .intro,
     .works {
       animation: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -240,6 +329,17 @@
       }
     }
 
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.35;
+        transform: scale(0.75);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     @media (max-width: 700px) {
       .shell {
         width: min(100% - 36px, 960px);
@@ -272,6 +372,13 @@
         grid-template-columns: auto 1fr;
         align-items: baseline;
         gap: 12px;
+      }
+
+      .theme-toggle {
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
       }
 
       .project {
@@ -319,12 +426,15 @@
   </style>
 </head>
 <body>
+  <button class="theme-toggle" type="button" aria-label="Qorong‘i rejimni yoqish" title="Rang rejimini almashtirish">
+    <span aria-hidden="true">◐</span>
+  </button>
   <div class="shell">
     <main>
       <section class="intro" aria-labelledby="intro-title">
         <h1 id="intro-title">Muhammadamin<br>Pulatov <span>Group 201</span></h1>
         <div class="meta">
-          <span>Web dasturlash</span>
+          <span class="status">Web dasturlash</span>
         </div>
       </section>
 
@@ -352,8 +462,39 @@
 
     <footer>
       <span>© 2026</span>
-      <a href="../../">Guruh 201</a>
+      <div class="social-links">
+        <a href="https://github.com/MuhammadaminPulatov" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="../../">Guruh 201</a>
+      </div>
     </footer>
   </div>
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.querySelector(".theme-toggle");
+    const savedTheme = localStorage.getItem("portfolio-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const startTheme = savedTheme || (prefersDark ? "dark" : "light");
+
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Yorug‘ rejimga o‘tish" : "Qorong‘i rejimga o‘tish"
+      );
+      themeToggle.querySelector("span").textContent = theme === "dark" ? "◑" : "◐";
+      document.querySelector('meta[name="theme-color"]').setAttribute(
+        "content",
+        theme === "dark" ? "#111111" : "#fafafa"
+      );
+    }
+
+    applyTheme(startTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("portfolio-theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+  </script>
 </body>
 </html>
