@@ -368,59 +368,98 @@
     }
 
     .project-card {
-      display: flex;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 24px 26px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: linear-gradient(110deg, rgba(24, 36, 58, 0.9), rgba(24, 36, 58, 0.5));
+      gap: 18px;
+      min-height: 96px;
+      padding: 18px 20px 18px 14px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      border-right: 0;
+      border-left: 0;
+      background: transparent;
       text-decoration: none;
-      transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+      transition: border-color 180ms ease, background 180ms ease, padding 180ms ease;
     }
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr;
+      border-bottom: 1px solid var(--line);
     }
 
     .project-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(140, 168, 255, 0.55);
-      background: linear-gradient(110deg, rgba(34, 50, 79, 0.95), rgba(24, 36, 58, 0.7));
+      padding-right: 14px;
+      border-color: rgba(140, 168, 255, 0.52);
+      background: linear-gradient(90deg, rgba(140, 168, 255, 0.1), transparent 72%);
+    }
+
+    .project-index {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--blue);
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .project-card:hover .project-index {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: var(--night);
+    }
+
+    .project-main {
+      display: grid;
+      gap: 6px;
     }
 
     .project-type {
       display: block;
-      margin-bottom: 7px;
+      margin: 0;
       color: var(--muted);
       font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
     .project-card strong {
       font-family: var(--display);
-      font-size: 20px;
+      font-size: clamp(17px, 2.2vw, 22px);
       font-weight: 500;
       letter-spacing: -0.04em;
     }
 
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
     .project-arrow {
       display: grid;
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       flex: 0 0 auto;
       place-items: center;
       border: 1px solid var(--line);
       border-radius: 50%;
       color: var(--blue);
       font-size: 18px;
-      transition: background 180ms ease;
+      transition: background 180ms ease, transform 180ms ease;
     }
 
     .project-card:hover .project-arrow {
-      background: rgba(140, 168, 255, 0.12);
+      transform: translate(2px, -2px);
+      background: rgba(140, 168, 255, 0.14);
     }
 
     footer {
@@ -450,6 +489,27 @@
 
       .project-grid {
         grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        gap: 12px;
+        min-height: 88px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .project-card:hover {
+        padding-right: 8px;
+      }
+
+      .project-index {
+        width: 44px;
+        height: 44px;
+      }
+
+      .project-meta {
+        display: none;
       }
 
       .topbar {
@@ -591,18 +651,26 @@
         </div>
         <div class="project-grid">
           <a class="project-card" href="./FlexBox/index.html">
-            <span>
+            <span class="project-index" aria-hidden="true">01</span>
+            <span class="project-main">
               <span class="project-type">HTML · CSS · Flexbox</span>
               <strong>Flexbox mashqlari</strong>
             </span>
-            <span class="project-arrow" aria-hidden="true">↗</span>
+            <span class="project-meta">
+              <span>Amaliy ish</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </span>
           </a>
           <a class="project-card" href="./ipak-yoli/index.html">
-            <span>
+            <span class="project-index" aria-hidden="true">02</span>
+            <span class="project-main">
               <span class="project-type">HTML · CSS · Sayohat veb-sahifasi</span>
               <strong>Ipak yo‘li Tours</strong>
             </span>
-            <span class="project-arrow" aria-hidden="true">↗</span>
+            <span class="project-meta">
+              <span>Veb-sayt</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </span>
           </a>
         </div>
       </section>
